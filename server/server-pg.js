@@ -26,7 +26,7 @@ app.get('/api/about/hosts/:id', (req, res) => {
 });
 
 app.get('/api/about/reviews/:listingId', (req, res) => {
-  console.log(req.params);
+  console.log('test', req.params);
   db.reviewsForHost(+req.params.listingId, (err, result) => {
     if (err) {
       console.log(err);
@@ -35,6 +35,54 @@ app.get('/api/about/reviews/:listingId', (req, res) => {
     }
   });
 });
+
+app.post('/api/about/reviews/new', (req, res) => {
+  console.log('from server post reviews', req.body);
+  db.addReviewForHost(req.body, (err, result) => {
+    if (err) {
+      console.log('err from server post reviews', err);
+      res.status(500).send(err);
+    } else {
+      console.log('result', result);
+      console.log('result rows', result.rows);
+      res.status(200).send(result);
+    }
+  });
+});
+
+app.delete('/api/about/reviews/:listingId/delete', (req, res) => {
+  console.log('test', req.params);
+  db.deleteReviewForHost(+req.params.listingId, (err, result) => {
+    if (err) {
+      console.log('err from server delete review', err);
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
+app.put('/api/about/reviews/:listingId/update', (req, res) => {
+  db.updateReviewRating(req.body, (err, result) => {
+    if (err) {
+      console.log('err from server update review', err); 
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(result);
+    }
+  });
+});
+
+// app.get('/api/about/reviews/:listingId', (req, res) => {
+//   console.log(req.params);
+//   db.addReviewForHost(+req.params.listingId, (err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       res.send(JSON.stringify(result));
+//     }
+//   });
+// });
 
 app.get('/api/about/neighborhood/:listingId', (req, res) => {
   db.neighborhoodInfo(+req.params.listingId, (err, result) => {

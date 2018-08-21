@@ -12,15 +12,12 @@
 ### hosts
 ```sh
 curl -X GET http://localhost:3001/api/about/hosts/:id
-curl -X POST http://localhost:3001/api/about/hosts/:id/new
-curl -X DELETE http://localhost:3001/api/about/hosts/:id/delete
-curl -X PUT http://localhost:3001/api/about/hosts/:id/update
 ```
 
 ### reviews
 ```sh
 curl -X GET http://localhost:3001/api/about/reviews/:listingId
-curl -X POST http://localhost:3001/api/about/reviews/:listingId/new
+curl -X POST http://localhost:3001/api/about/reviews/new
 curl -X DELETE http://localhost:3001/api/about/reviews/:listingId/delete
 curl -X PUT http://localhost:3001/api/about/reviews/:listingId/update
 ```
@@ -28,7 +25,4 @@ curl -X PUT http://localhost:3001/api/about/reviews/:listingId/update
 ### neighborhood
 ```sh
 curl -X GET http://localhost:3001/api/about/neighborhood/:listingId
-curl -X POST http://localhost:3001/api/about/neighborhood/:listingId/new
-curl -X DELETE http://localhost:3001/api/about/neighborhood/:listingId/delete
-curl -X PUT http://localhost:3001/api/about/neighborhood/:listingId/update
 ```

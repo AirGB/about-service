@@ -2,3 +2,4 @@ node_modules
 client/config/googleMap.js
 *csv
 apache-cassandra-3.11.3
+NEW_RELIC_KEY.js
