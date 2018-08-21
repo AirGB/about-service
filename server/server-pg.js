@@ -1,8 +1,10 @@
+const nr = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 // need to create a file to select data
 const db = require('../db/queries-pg.js');
+
 
 const app = express();
 
@@ -14,7 +16,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/api/about/hosts/:id', (req, res) => {
   // console.log(req.params);
   db.selectHostInfo(+req.params.id, (err, result) => {
-   console.log('heeeeeelo', arguments);
+    console.log('heeeeeelo', arguments);
     if (err) {
       console.log(err);
     } else {
