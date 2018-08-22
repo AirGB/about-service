@@ -1,9 +1,9 @@
 config:
   target: "http://localhost:3001"
   phases:
-    - duration: 60
-      arrivalRate: 10
-      rampTo: 20
+    - duration: 120
+      arrivalRate: 20
+      rampTo: 30
       name: "warm up"
   payload:
     path: "artillery-reviews.csv"
@@ -12,31 +12,31 @@ config:
       - "userId"
       - "listId"
       - "rating"
-    order: "sequence"
+    # order: "sequence"
 scenarios:
   - name: "get hosts by userId"
-    weight: 25
+    weight: 35
     flow:
     - loop:
       - get:
           url: "/api/about/hosts/{{ userId }}"
       count: 20
   - name: "get reviews by userId"
-    weight: 20
+    weight: 35
     flow: 
     - loop: 
       - get:
           url: "/api/about/reviews/{{ userId }}"
       count: 20
   - name: "get listings by listId"
-    weight: 30
+    weight: 40
     flow:
     - loop:
       - get:
           url: "/api/about/neighborhood/{{ listId }}"
       count: 20  
   - name: "post review for host"
-    weight: 20
+    weight: 30
     flow:
     - loop:
       - post:
@@ -46,20 +46,21 @@ scenarios:
             userId: "{{ userId }}"
             listId: "{{ listId }}"
             rating: "{{ rating }}"
-      count: 20
-  # - name: "delete review"
-  #   weight: 5 
-  #   flow:
-  #   - loop:
-  #     - delete:
-  #         url: "/api/about/reviews/{{ id }}/delete"           
-  #     count: 10
-  # - name: "update review rating"
-  #   weight: 5
-  #   flow: 
-  #   - loop:
-  #     - put: 
-  #         url: "/api/about/reviews/{{ id }}/update"
-  #         json:
-  #           rating: {{ rating }}
-  #     count: 10
+      count: 1
+  - name: "delete review"
+    weight: 5 
+    flow:
+    - loop:
+      - delete:
+          url: "/api/about/reviews/{{ id }}/delete"           
+      count: 1
+  - name: "update review rating"
+    weight: 20
+    flow: 
+    - loop:
+      - put: 
+          url: "/api/about/reviews/{{ userId }}/update"
+          json:
+            id: "{{ userId }}"
+            rating: "{{ rating }}"
+      count: 1
