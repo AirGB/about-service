@@ -30,6 +30,8 @@
     "react-css-modules": "^4.7.4",
     "react-dom": "^16.2.0",
     "react-google-maps": "^9.4.5",
+    "redis": "^2.8.0",
+    "response-time": "^2.3.2",
     "webpack": "^3.11.0"
   },
   "devDependencies": {
