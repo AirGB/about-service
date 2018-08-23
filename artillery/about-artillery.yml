@@ -36,24 +36,24 @@ scenarios:
           url: "/api/about/neighborhood/{{ listId }}"
       count: 20  
   - name: "post review for host"
-    weight: 30
+    weight: 25
     flow:
     - loop:
       - post:
           url: "/api/about/reviews/new"
           json: 
-            id: "{{ id }}"
+            # id: "{{ id }}"
             userId: "{{ userId }}"
             listId: "{{ listId }}"
             rating: "{{ rating }}"
-      count: 1
+      count: 5
   - name: "delete review"
     weight: 5 
     flow:
     - loop:
       - delete:
           url: "/api/about/reviews/{{ id }}/delete"           
-      count: 1
+      count: 5
   - name: "update review rating"
     weight: 20
     flow: 
@@ -63,4 +63,4 @@ scenarios:
           json:
             id: "{{ userId }}"
             rating: "{{ rating }}"
-      count: 1
+      count: 5

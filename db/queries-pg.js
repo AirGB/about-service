@@ -20,14 +20,14 @@ const reviewsForHost = (userId, callback) => {
     if (err) {
       callback(err);
     } else {
-      console.log('reviews length', result.rows.length);
+      // console.log('reviews length', result.rows.length);
       callback(null, result.rows.length);
     }
   });
 };
 
 const addReviewForHost = (body, callback) => {
-  const theQuery = `insert into reviews (id, user_id, list_id, rating) values (${body.id}, ${body.userId}, ${body.listId}, ${body.rating})`;
+  const theQuery = `insert into reviews (user_id, list_id, rating) values (${body.userId}, ${body.listId}, ${body.rating})`;
   client.query(theQuery, (err, result) => {
     if (err) {
       console.log('error from add Review', err);
@@ -45,6 +45,7 @@ const deleteReviewForHost = (id, callback) => {
       console.log('error from delete Review', err);
       callback(err);
     } else {
+      // console.log("DELETED qpg", result);
       callback(null, result);
     }
   });
@@ -69,7 +70,7 @@ const neighborhoodInfo = (id, callback) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('neighborhoodInfo', result.rows);
+      // console.log('neighborhoodInfo', result.rows);
       callback(null, result.rows);
     }
   });
@@ -79,5 +80,10 @@ const neighborhoodInfo = (id, callback) => {
 // addReviewForHost(10000007, 1, 1, 5);
 
 module.exports = {
-  selectHostInfo, reviewsForHost, addReviewForHost, deleteReviewForHost, updateReviewRating, neighborhoodInfo,
+  selectHostInfo,
+  reviewsForHost,
+  addReviewForHost,
+  deleteReviewForHost,
+  updateReviewRating,
+  neighborhoodInfo,
 };
