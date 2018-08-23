@@ -6,7 +6,7 @@
     -- The lines to populate the database are at the bottom 
       -- These can only be run after the relevant csv files are generated
 
--- DROP DATABASE IF EXISTS rental_hosts;
+DROP DATABASE IF EXISTS rental_hosts;
 CREATE DATABASE rental_hosts;
 
 \c rental_hosts;

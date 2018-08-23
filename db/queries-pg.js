@@ -7,15 +7,15 @@ const selectHostInfo = (id, callback) => {
     if (err) {
       callback(err);
     } else {
-      console.log('hosts', result.rows);
+      // console.log('hosts', result.rows);
       callback(null, result.rows);
     }
   });
 };
 
 // reviews
-const reviewsForHost = (id, callback) => {
-  const theQuery = `select * from reviews where user_id = ${id}`;
+const reviewsForHost = (userId, callback) => {
+  const theQuery = `select * from reviews where user_id = ${userId}`;
   client.query(theQuery, (err, result) => {
     if (err) {
       callback(err);
@@ -51,7 +51,7 @@ const deleteReviewForHost = (id, callback) => {
 };
 
 const updateReviewRating = (body, callback) => {
-  const theQuery = `update reviews set rating = ${body.rating} where user_id = ${body.userId}`;
+  const theQuery = `update reviews set rating = ${body.rating} where id = ${body.id}`;
   client.query(theQuery, (err, result) => {
     if (err) {
       console.log('error from update review rating query', err);

@@ -16,10 +16,10 @@ curl -X GET http://localhost:3001/api/about/hosts/:id
 
 ### reviews
 ```sh
-curl -X GET http://localhost:3001/api/about/reviews/:listingId
+curl -X GET http://localhost:3001/api/about/reviews/:userId
 curl -X POST http://localhost:3001/api/about/reviews/new
-curl -X DELETE http://localhost:3001/api/about/reviews/:listingId/delete
-curl -X PUT http://localhost:3001/api/about/reviews/:listingId/update
+curl -X DELETE http://localhost:3001/api/about/reviews/:id/delete
+curl -X PUT http://localhost:3001/api/about/reviews/:id/update
 ```
 
 ### neighborhood

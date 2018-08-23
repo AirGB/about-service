@@ -16,18 +16,17 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.get('/api/about/hosts/:id', (req, res) => {
   // console.log(req.params);
   db.selectHostInfo(+req.params.id, (err, result) => {
-    console.log('heeeeeelo', arguments);
     if (err) {
-      console.log(err);
+      console.log('error in server pg', err);
     } else {
-      res.send(JSON.stringify(result));
+      res.send(result);
     }
   });
 });
 
-app.get('/api/about/reviews/:listingId', (req, res) => {
+app.get('/api/about/reviews/:userId', (req, res) => {
   console.log('test', req.params);
-  db.reviewsForHost(+req.params.listingId, (err, result) => {
+  db.reviewsForHost(+req.params.userId, (err, result) => {
     if (err) {
       console.log(err);
     } else {
