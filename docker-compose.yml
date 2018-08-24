@@ -2,14 +2,16 @@ version: '3'
 
 services: 
   redis:
-    image: "redis:4.0.11"
+    image: "redis:alpine"
     ports:
       - "6379"
-  postgres:
-    image: "postgres:10.5"
-    environment:
-      POSTGRES_USER: kerogiro
-      POSTGRES_DB: rental_hosts
+  # postgres:
+  #   image: "postgres:alpine"
+  #   environment:
+  #     POSTGRES_USER: kerogiro
+  #     POSTGRES_DB: rental_hosts
+  #   ports: 
+  #     - "1458:5432"
   web: 
     image: about-server
     depends_on:
