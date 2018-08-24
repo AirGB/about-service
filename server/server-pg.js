@@ -11,8 +11,14 @@ const app = express();
 const db = require('../db/queries-pg.js');
 
 // create and connect redis client to local instance
-const reClient = redis.createClient();
+const reClient = redis.createClient({
+  host: process.env.REDIS || '127.0.0.1'
+});
 
+// print on successful connection to redis
+reClient.on('connect', () => {
+  console.log('connected to redis!');
+});
 // print redis errors to console
 reClient.on('error', (err) => {
   console.log('Error', err);

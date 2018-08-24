@@ -2,7 +2,7 @@ const {Client} = require('pg');
 
 const client = new Client({
   user: 'kerogiro',
-  host: 'localhost',
+  host: process.env.DB || 'localhost',
   database: 'rental_hosts',
 });
 

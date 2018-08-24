@@ -1,0 +1,23 @@
+version: '3'
+
+services: 
+  redis:
+    image: "redis:4.0.11"
+    ports:
+      - "6379"
+  postgres:
+    image: "postgres:10.5"
+    environment:
+      POSTGRES_USER: kerogiro
+      POSTGRES_DB: rental_hosts
+  web: 
+    image: about-server
+    depends_on:
+      - 'redis'
+      - 'postgres'
+    ports:
+      - "3001:3001"
+    environment:
+      - DB=postgres
+      - REDIS=redis
+    command: ["./wait-for-it.sh", "postgres:5432", "--", "npm", "start"]
