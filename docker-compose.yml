@@ -5,13 +5,13 @@ services:
     image: "redis:alpine"
     ports:
       - "6379"
-  # postgres:
-  #   image: "postgres:alpine"
-  #   environment:
-  #     POSTGRES_USER: kerogiro
-  #     POSTGRES_DB: rental_hosts
-  #   ports: 
-  #     - "1458:5432"
+  postgres:
+    image: "postgres:alpine"
+    environment:
+      POSTGRES_USER: kerogiro
+      POSTGRES_DB: rental_hosts
+    ports: 
+      - "1458:5432"
   web: 
     image: about-server
     depends_on:
