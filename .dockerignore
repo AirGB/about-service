@@ -1,3 +1,4 @@
+db/sdc/csvTables
 db/sdc/apache-cassandra-3.11.3
 artillery
 .vscode
