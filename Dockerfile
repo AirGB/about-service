@@ -1,13 +1,7 @@
-FROM node:latest
-
-RUN mkdir -p /src/app
-
-WORKDIR /src/app
-
-COPY . /src/app
-
+FROM node:8.10.0
+WORKDIR /app
+COPY ["package.json", "package-lock.json*"]
 RUN npm install
-
+COPY . .
 EXPOSE 3001
-
-CMD ["npm", "start"]
+CMD npm start

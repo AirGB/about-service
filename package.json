@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack -d --watch",
-    "start": "nodemon ./server/server-pg.js"
+    "start": "node ./server/server-pg.js"
   },
   "keywords": [],
   "author": "",

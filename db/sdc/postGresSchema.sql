@@ -12,7 +12,7 @@ CREATE DATABASE rental_hosts;
 \c rental_hosts;
 
 CREATE TABLE hosts (
-  id INTEGER NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   first_name TEXT NOT NULL,
   last_name TEXT NOT NULL,
   city TEXT NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE hosts (
 );
 
 CREATE TABLE listings (
-  id INTEGER NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   features TEXT,
   things_to_do TEXT,
   lat_location NUMERIC,
@@ -39,12 +39,10 @@ CREATE TABLE listings (
 );
 
 CREATE TABLE reviews (
-  id INTEGER NOT NULL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   user_id INTEGER NOT NULL,
   list_id INTEGER NOT NULL,
-  rating INTEGER NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES hosts(id),
-  FOREIGN KEY (list_id) REFERENCES listings(id)
+  rating INTEGER NOT NULL
 );
 
 -- Uncomment lines below and run psql < postGresSchama.sql in terminal 
@@ -52,3 +50,13 @@ CREATE TABLE reviews (
 \copy hosts FROM './csvTables/hostsTable.csv' DELIMITER ',' CSV;
 \copy listings FROM './csvTables/listingsTable.csv' DELIMITER ',' CSV;
 \copy reviews FROM './csvTables/reviewsTable.csv' DELIMITER ',' CSV; 
+
+-- Add foreign key constraints after populating tables
+ALTER TABLE reviews ADD CONSTRAINT foreignk_userID FOREIGN KEY (user_id) REFERENCES hosts(id);
+ALTER TABLE reviews ADD CONSTRAINT foreignk_listID FOREIGN KEY (list_id) REFERENCES listings(id);
+
+-- Create indexes for faster gets
+CREATE INDEX on reviews(user_id);
+CREATE INDEX on reviews(list_id);
+
+
